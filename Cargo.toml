@@ -1,0 +1,12 @@
+[workspace]
+version = "1.0.0"
+edition = "2021"
+resolver = "2"
+
+members = [
+
+    "services/log-collector"
+    
+]
+
+
