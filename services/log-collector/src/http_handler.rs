@@ -15,6 +15,7 @@ pub async fn ingest_log(
     State(state): State<Arc<AppState>>,
     Json(payload): Json<LogEntry>
 ) -> StatusCode {
+    
     info!("✅ Received log: {:?}", payload); // ✅ Ensures log is printed
 
     if let Err(_) = state.sender.send(payload.clone()).await {
