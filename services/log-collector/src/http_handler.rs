@@ -16,6 +16,7 @@ pub async fn ingest_log(
     State(state): State<Arc<AppState>>,
     body: Bytes // Use Zero-Copy `Bytes` for performance
 ) -> StatusCode {
+
     if let Ok(body_str) = str::from_utf8(&body) {
         let json: Value = match serde_json::from_str(body_str) {
             Ok(data) => data,
@@ -38,6 +39,10 @@ pub async fn ingest_log(
             return StatusCode::OK;
         }
     }
+
+    
+    info!("✅ Received log: {:?}", payload); // ✅ Ensures log is printed
+
 
     error!("❌ Invalid JSON format: Expected single LogEntry or array");
     StatusCode::BAD_REQUEST
